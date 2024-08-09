@@ -31,7 +31,23 @@ namespace Assignment3WebAPI.Controllers
             }
             return Ok(book);
         }
-
+        /// <summary>
+        /// You can Add Books for Library here.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/Book
+        ///     {
+        ///         "id": 0,
+        ///         "title": "string",
+        ///         "author": "string",
+        ///         "publicationYear": 0,
+        ///         "isbn": "string"
+        ///     }
+        /// </remarks>
+        /// <param name="Add Book"></param>
+        /// <returns> This endpoint returns a list of Accounts.</returns>
         [HttpPost]
         public IActionResult AddBook([FromBody]Book book)
         {
@@ -42,7 +58,24 @@ namespace Assignment3WebAPI.Controllers
             _bookService.AddBook(book);
             return Ok(book);
         }
+        /// <summary>
+        /// You can Update Books for Library here.
+        /// </summary>
 
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/Book/{1}
+        ///     {
+        ///         "id": 1,
+        ///         "title": "string",
+        ///         "author": "string",
+        ///         "publicationYear": 2012,
+        ///         "isbn": "string"
+        ///     }
+        /// </remarks>
+        /// <param name="Add Book"></param>
+        /// <returns> This endpoint returns a list of Accounts.</returns>
         [HttpPut("{id}")]
         public IActionResult UpdateBook(int id, [FromBody]Book updatedBook)
         {
@@ -53,7 +86,18 @@ namespace Assignment3WebAPI.Controllers
             _bookService.UpdateBook(id, updatedBook);
             return Ok(book);
         }
+        /// <summary>
+        /// You can Delete Book for Library here.
+        /// </summary>
 
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     DELETE /api/Book/{id}
+        ///     
+        /// </remarks>
+        /// <param name="Add Book"></param>
+        /// <returns> This endpoint returns a list of Accounts.</returns>
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
