@@ -1,10 +1,13 @@
-﻿using Assignment3WebAPI.Interfaces;
+﻿using Asp.Versioning;
+using Assignment3WebAPI.Interfaces;
 using Assignment3WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment3WebAPI.Controllers
 {
-    [Route("api/[Controller]")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[Controller]")]
     [ApiController]
     public class BookController : ControllerBase
     {
@@ -16,12 +19,14 @@ namespace Assignment3WebAPI.Controllers
         }
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         public IActionResult GetAllBook()
         {
             return Ok(_bookService.GetAllBooks());
         }
 
         [HttpGet("{id}")]
+        [MapToApiVersion("1.0")]
         public IActionResult GetBookById(int id)
         {
             var book = _bookService.GetBookById(id);
@@ -37,7 +42,7 @@ namespace Assignment3WebAPI.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/Book
+        ///     POST /api/v1/Book
         ///     {
         ///         "id": 0,
         ///         "title": "string",
@@ -49,6 +54,7 @@ namespace Assignment3WebAPI.Controllers
         /// <param name="Add Book"></param>
         /// <returns> This endpoint returns a list of Accounts.</returns>
         [HttpPost]
+        [MapToApiVersion("1.0")]
         public IActionResult AddBook([FromBody]Book book)
         {
             if (!ModelState.IsValid)
@@ -65,7 +71,7 @@ namespace Assignment3WebAPI.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     PUT /api/Book/{1}
+        ///     PUT /api/v1/Book
         ///     {
         ///         "id": 1,
         ///         "title": "string",
@@ -77,6 +83,7 @@ namespace Assignment3WebAPI.Controllers
         /// <param name="Add Book"></param>
         /// <returns> This endpoint returns a list of Accounts.</returns>
         [HttpPut("{id}")]
+        [MapToApiVersion("1.0")]
         public IActionResult UpdateBook(int id, [FromBody]Book updatedBook)
         {
             var book = _bookService.GetBookById(id);
@@ -93,12 +100,13 @@ namespace Assignment3WebAPI.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     DELETE /api/Book/{id}
+        ///     DELETE /api/v1/Book/{id}
         ///     
         /// </remarks>
         /// <param name="Add Book"></param>
         /// <returns> This endpoint returns a list of Accounts.</returns>
         [HttpDelete("{id}")]
+        [MapToApiVersion("1.0")]
         public IActionResult DeleteBook(int id)
         {
             var book = _bookService.GetBookById(id);
