@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment3WebAPI.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
@@ -16,7 +18,7 @@ namespace Assignment3WebAPI.Controllers
         [HttpGet]
         public IActionResult GetAllBook()
         {
-            return Ok(_bookService.GetAllBooks);
+            return Ok(_bookService.GetAllBooks());
         }
 
         [HttpGet("{id}")]
@@ -30,7 +32,7 @@ namespace Assignment3WebAPI.Controllers
             return Ok(book);
         }
 
-        [HttpPost("AddBook")]
+        [HttpPost]
         public IActionResult AddBook([FromBody]Book book)
         {
             if (!ModelState.IsValid)
